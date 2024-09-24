@@ -1,0 +1,139 @@
+#include <bits/stdc++.h>
+using namespace std;
+class User{
+   string name;
+   string username;
+   string password;
+   string phoneNumber;
+   string emailAddress;
+   string role;
+public:
+    User(){
+        this-> name="";
+        this-> username="";
+        this-> password="";
+        this->phoneNumber="";
+        this->emailAddress="";
+        this->role="";
+    }
+    User(  string name,string username,string password,string phoneNumber,string emailAddress,string role){
+        this-> name=name;
+        this-> username=username;
+        this-> password=password;
+        this->phoneNumber=phoneNumber;
+        this->emailAddress=emailAddress;
+        this->role=role;
+    }
+    string pass;
+    void login() {
+        cout << "********( Welcome to Fayoum Library )********\nTo login ,please Enter your emailAddress: ";
+        string em_ad;
+        cin >> em_ad;
+        cout << "Enter your password: ";
+        cin >> pass;
+        if (em_ad == this->emailAddress && pass == this->password) {
+            cout << "( You have been successfully logged into your account. )\n";
+        } else {
+            int NumOfTrying = 3;
+            while (NumOfTrying--) {
+                cout << "( Your emailAddress or your password is incorrect ,Please try again. )\n";
+                cout << "Enter your emailAddress:";
+                cin >> em_ad;
+                cout << "Enter your password:";
+                cin >> pass;
+                if (em_ad == this->emailAddress && pass == this->password) {
+                    cout << "( You have been successfully logged into your account. )\n";
+                    break;
+                }
+                if (NumOfTrying == 0) {
+                    cout<< "( You have reached the maximum number of trying )\n ( Did you forget your emailAddress or your password ? )\n";
+                    cout << "( If you forgot your emailAddress , use your phoneNumber. )\nEnter your phoneNumber:";
+                    string ph_num;
+                    cin >> ph_num;
+                    if (ph_num == this->phoneNumber) {
+                        cout << "Enter your password:";
+                        cin >> pass;
+                        if (pass == this->password) {
+                            cout << "( Login completed successfully. )\n";
+                            break;
+                        } else {
+                            cout
+                                    << "( If you forgot your password ,change your password After a confirmation message is sent to your phone number. )\n";
+                            const string confirmation_message = "123456";
+                            cout << "Enter your confirmation message:";
+                            string massage;
+                            cin >> massage;
+                            if (confirmation_message == massage) {
+                                cout << "( You can change your password ).\nwrite your new password:";
+                                cin >> pass;
+                                this->password = pass;
+                                cout << "( The password has been changed successfully,Re-login. )\n";
+                                break;
+                            } else {
+                                cout << "( Wrong code, failed to change password,try later. )\n";
+                                break;
+                            }
+                        }
+                    } else {
+                        cout << "( This phoneNumber is invalid,try later. )\n";
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+   void logout()
+    {
+        cout << "( Are you sure you want to logout ? yes/no )";
+        string sure;
+        cin >> sure;
+        if(sure=="yes"||sure=="YES"||sure=="Yes")
+        {
+            cout << "( You have successfully logged out .)\n";
+        }
+
+    }
+    void changePassword(){
+        cout << " ( If you want to change your password ) Enter your old password :";
+        cin >> pass;
+        if(pass==this->password) {
+            cout << "Enter your new password :";
+            string new_pass;
+            cin >> new_pass;
+            this->password = new_pass;
+            cout << "( The password has been changed successfully. )\n";
+        }
+        else
+        {
+            int num=3;
+            while(num--){
+                cout << "( Wrong password,try again. )\n";
+                cout << " Enter your old password :";
+                cin >> pass;
+                if(pass==this->password) {
+                    cout << "Enter your new password :";
+                    string new_pass;
+                    cin >> new_pass;
+                    this->password = new_pass;
+                    cout << "( The password has been changed successfully. )\n";
+                    break;
+                }
+                if(num==0){
+                    cout << "maximum trying ,failed!!\n";
+                }
+            }
+
+        }
+
+    }
+};
+int main() {
+    User c1("fatma","fatmaa","123123","012536478","fatma@gmail.com","patron");
+   c1.login();
+    c1.logout();
+    c1.changePassword();
+    cout << "\n--------------------------------------------------\n";
+
+    return 0;
+}
