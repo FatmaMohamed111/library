@@ -17,11 +17,7 @@ public:
         this->emailAddress="";
         this->role="";
     }
-    User( string name)
-    {
-        this-> name=name;
-    }
-    User(  string name,string username,string password,string phoneNumber,string emailAddress,string role){
+    User( string name,string username,string password,string phoneNumber,string emailAddress,string role){
         this-> name=name;
         this-> username=username;
         this-> password=password;
@@ -31,57 +27,58 @@ public:
     }
     string pass;
     void login() {
-        cout << "********( Welcome to Fayoum Library )********\nTo login ,please Enter your emailAddress: ";
+        cout << "                    ********( Welcome to Fayoum Library )********\nTo login ,please Enter your emailAddress: ";
         string em_ad;
         cin >> em_ad;
         cout << "Enter your password: ";
         cin >> pass;
         if (em_ad == this->emailAddress && pass == this->password) {
-            cout << "( You have been successfully logged into your account. )\n";
+            cout << "( ( You have been successfully logged into your account. ) )\n";
         } else {
             int NumOfTrying = 3;
             while (NumOfTrying--) {
-                cout << "( Your emailAddress or your password is incorrect ,Please try again. )\n";
+                cout << " Your emailAddress or your password is incorrect.\n Please, try again you have only three " << NumOfTrying+1 <<" attempts!\n";
                 cout << "Enter your emailAddress:";
                 cin >> em_ad;
                 cout << "Enter your password:";
                 cin >> pass;
                 if (em_ad == this->emailAddress && pass == this->password) {
-                    cout << "( You have been successfully logged into your account. )\n";
+                    cout << " ( ( You have been successfully logged into your account. ) )\n";
                     break;
                 }
                 if (NumOfTrying == 0) {
-                    cout<< "( You have reached the maximum number of trying )\n ( Did you forget your emailAddress or your password ? )\n";
-                    cout << "( If you forgot your emailAddress , use your phoneNumber. )\nEnter your phoneNumber:";
+                    cout << "                               ****(Warning)****\n";
+                    cout<< " You have reached the maximum number of trying , Did you forget your emailAddress or your password ? \n";
+                    cout << " If you forgot your emailAddress , use your phoneNumber. \nEnter your phoneNumber:";
                     string ph_num;
                     cin >> ph_num;
                     if (ph_num == this->phoneNumber) {
                         cout << "Enter your password:";
                         cin >> pass;
                         if (pass == this->password) {
-                            cout << "( Login completed successfully. )\n";
+                            cout << " Login completed successfully. \n";
                             break;
                         } else {
                             cout
-                                    << "( If you forgot your password ,change your password After a confirmation message is sent to your phone number. )\n";
+                                    << " Did you forgot your password? \n change your password After a confirmation message is sent to your phone number. \n";
                             const string confirmation_message = "123456";
-                            cout <<"(Your confirmation message is :)" << confirmation_message << "\n";
+                            cout <<"Your confirmation message is :" << confirmation_message << "\n";
 ;                            cout << "Enter your confirmation message:";
                             string massage;
                             cin >> massage;
                             if (confirmation_message == massage) {
-                                cout << "( You can change your password ).\nwrite your new password:";
+                                cout << " You can change your password.\nwrite your new password:";
                                 cin >> pass;
                                 this->password = pass;
-                                cout << "( The password has been changed successfully,Re-login. )\n";
+                                cout << " The password has been changed successfully,Re-login. \n";
                                 break;
                             } else {
-                                cout << "( Wrong code, failed to change password,try later. )\n";
+                                cout << " Wrong code, failed to change password,try later. \n";
                                 break;
                             }
                         }
                     } else {
-                        cout << "( This phoneNumber is invalid,try later. )\n";
+                        cout << " This phoneNumber is invalid in website,try later. \n";
                         break;
                     }
                 }
@@ -91,30 +88,32 @@ public:
     }
     void logout()
     {
-        cout << "( Are you sure you want to logout ? yes/no )";
+        cout << "\n                   ********(Logout process)********\n";
+        cout << " Are you sure you want to logout ? write(yes/no) ";
         string sure;
         cin >> sure;
         if(sure=="yes"||sure=="YES"||sure=="Yes")
         {
-            cout << "( You have successfully logged out .)\n";
+            cout << " You have successfully logged out .\n";
         }
 
     }
     void changePassword(){
-        cout << " ( If you want to change your password ) Enter your old password :";
+        cout << "               ********(Change password process)*******\n";
+        cout << "  If you want to change your password  Enter your old password :";
         cin >> pass;
         if(pass==this->password) {
             cout << "Enter your new password :";
             string new_pass;
             cin >> new_pass;
             this->password = new_pass;
-            cout << "( The password has been changed successfully. )\n";
+            cout << "(( The password has been changed successfully )) \n";
         }
         else
         {
-            int num=3;
-            while(num--){
-                cout << "( Wrong password,try again. )\n";
+            int numTRY=3;
+            while(numTRY--){
+                cout << " Wrong password,try again,you have only "<< numTRY+1<< " attempts\n";
                 cout << " Enter your old password :";
                 cin >> pass;
                 if(pass==this->password) {
@@ -122,10 +121,10 @@ public:
                     string new_pass;
                     cin >> new_pass;
                     this->password = new_pass;
-                    cout << "( The password has been changed successfully. )\n";
+                    cout << " The password has been changed successfully. \n";
                     break;
                 }
-                if(num==0){
+                if(numTRY==0){
                     cout << "maximum trying ,failed!!\n";
                 }
             }
@@ -135,29 +134,52 @@ public:
     }
 };
 class Book{
-    string title;
+protected:
+    string title_book;
     string author;
     string genre;
     static int num_of_copies;
+     string book_collection[20]={"The_Secret"
+                                ,"Out_of_The_Maze"
+                                ,"7_Habits"
+                                ,"Outliers"
+                                ,"Atomic_Habits"
+                                ,"The_5_am_Club",
+                                "Unlimited_Power",
+                                "Awaken_The_Giant_Within",
+                                "Rich_Dad_Poor_Dad",
+                                "Harry_Potter"};
 public:
     Book(){
-        this->title="";
+        this->title_book="";
         this->author="";
         this->genre="";
-        this->num_of_copies=50;
 
     }
-    Book( string title,string author,string genre,int num_of_copies){
-        this->title=title;
-        this->author=author;
-        this->genre=genre;
-        this->num_of_copies=num_of_copies;
+int place_book;
+    bool founded_book(string title)
+    {
+        bool flag = 0;
+        for (int i = 0; i < 10; i++) {
+            if (title_book == book_collection[i]) {
+                flag = 1;
+                place_book = i;
+                break;
+            }
+        }
+        if(flag) {return true;}
+        else
+        {return false;}
     }
-   void checkout() {
+    string checked_book="";
+   void checkout_book() {
+      cout << "*******(Books collection)*******\n";
+       for(int i=0;i<12;i++){
+           cout << i+1 <<"_ "<< book_collection[i]<< "\n";
+       }
        cout << "\nEnter the title of the book you want to borrow :";
-       string book_borrow;
-       cin >> book_borrow;
-       if(this->title==book_borrow) {
+       cin >> title_book;
+       if( founded_book(title_book)) {
            if (num_of_copies > 0) {
                cout << "Available.\n";
                cout << "Enter the borrowing duration in days:";
@@ -166,6 +188,7 @@ public:
                if(borrowing_duration>30)
                    cout << "Not available It must be less than 31 days\n";
                else {
+                   checked_book+=title_book+ " Book\n";
                    cout << " The total price is : " << borrowing_duration * 10 << "\n";
                    cout << "*****(Borrowing completed successfully)*****\n";
                    num_of_copies--;
@@ -177,76 +200,108 @@ public:
        else
            cout << "Not available in this library.\n";
    }
-        void checkin(){
+        void checkin_book(){
             cout << "\nEnter the title of the book you want to return :";
-            string book_borrow;
-            cin >> book_borrow;
-            if(book_borrow==this->title){
+            cin >> title_book;
+            if( founded_book(title_book)) {
                 this->num_of_copies++;
+                cout << "Returning process completed successfully\n";
             }
-cout << "Returning process completed successfully\n";
-
+            else
+                cout << "The title is incorrect.\n";
         }
-        void renew(){
+        void renew_book(){
             cout << "\nEnter the title of the book you want to renew :";
-            string book_borrow;
-            cin >> book_borrow;
-            cout << "How many times have you done this process for this book?\n";
-int num_renew;
-cin >> num_renew;
-if(num_renew>3) {
-    cout << "Sorry ,you have done the maximum of this process.\n";
-    if(book_borrow==this->title) { num_of_copies++; }
-}
-    else
-{  cout << "Ok , it is available \n";
-            cout << "Enter the borrowing duration in days:";
-            int borrowing_duration;
-            cin >> borrowing_duration;
-    if(borrowing_duration>30)
-        cout << "Not available It must be less than 31 days\n";
-    else {
-        cout << " The total price is : " << borrowing_duration * 10 << "\n";
-        cout << "*****(Renewing process completed successfully)*****\n";
-    }
+            cin >>title_book;
+            if( founded_book(title_book)) {
+                cout << "How many times have you done this process for this book?\n";
+                int num_renew;
+                cin >> num_renew;
+                if(num_renew>3) {
+                    cout << "Sorry ,you have done the maximum of this process.\n";
 
-}
+
+                }
+                else
+                {
+                    num_of_copies++;
+                    cout << "Ok , it is available \n";
+                    cout << "Enter the borrowing duration in days:";
+                    int borrowing_duration;
+                    cin >> borrowing_duration;
+                    if(borrowing_duration>30)
+                        cout << "Not available It must be less than 31 days\n";
+                    else {
+                        cout << " The total price is : " << borrowing_duration * 10 << "\n";
+                        cout << "*****(Renewing process completed successfully)*****\n";
+                    }
+
+                }
+            }
+            else {
+                cout << "The title is incorrect.\n";
+            }
     }
-    bool isAvailable() {
+    void isAvailable_book() {
         cout << "\nEnter the title of the book you want to know it is available :";
-        string book_borrow;
-        cin >> book_borrow;
-        if (this->title == book_borrow&&num_of_copies>0) {
+        cin >> title_book;
+        if( founded_book(title_book)&&num_of_copies>0) {
             cout << "This book is available.\n";
+
         } else
             cout << "This book is not available.\n";
+
     }
 };
-int Book::num_of_copies=0;
+int Book::num_of_copies=3;
 class Magazine{
-    string title;
+protected:
+    string title_magazine;
     string publisher;
     string  publicationDate;
     static int numberOfCopies;
+    string magazines_collection[20]={
+            "Consumer_Reports"
+            ,"People"
+            ,"National_Geographic_Kids"
+            ,"Sports_Illustrated_For_Kids"
+            ,"National_Geographic_Magazine"
+            ,"Time_Magazine"
+            ,"Sports_Illustrated"
+            ,"Better_Homes_&_Gardens"
+            ,"Good_Housekeeping"
+            ,"Real_Simple"};
 public:
 
     Magazine(){
-        this->title="";
+        this->title_magazine="";
         this->publisher="";
         this->publicationDate="";
-        this->numberOfCopies=5;
     }
-    Magazine(string title,string publisher,string  publicationDate,int numberOfCopies) {
-        this->title = title;
-        this->publisher = publisher;
-        this->publicationDate = publicationDate;
-        this->numberOfCopies = numberOfCopies;
+    int place_magazine=0;
+    bool founded_magazine(string title)
+    {
+        bool flag = 0;
+        for (int i = 0; i < 20; i++) {
+            if (title_magazine == magazines_collection[i]) {
+                flag = 1;
+                place_magazine = i;
+                break;
+            }
+        }
+        if(flag) {return true;}
+        else
+        {return false;}
     }
-    void checkout() {
+    string checked_magazine="";
+    void checkout_magazine() {
+        cout << "*******(Magazines collection)*******\n";
+        for(int i=0;i<10;i++){
+            cout << i+1 <<"_ "<< magazines_collection[i]<< "\n";
+        }
         cout << "\nEnter the title of the Magazine you want to borrow :";
-        string book_borrow;
-        cin >> book_borrow;
-        if(this->title==book_borrow) {
+        cin >> title_magazine;
+        if( founded_magazine(title_magazine)) {
             if (numberOfCopies > 0) {
                 cout << "Available.\n";
                 cout << "Enter the borrowing duration in days:";
@@ -255,6 +310,7 @@ public:
                 if(borrowing_duration>30)
                     cout << "Not available It must be less than 31 days\n";
                 else {
+                    checked_magazine+=title_magazine+" Magazine\n";
                     cout << " The total price is : " << borrowing_duration * 10 << "\n";
                     cout << "*****(Borrowing completed successfully)*****\n";
                     numberOfCopies--;
@@ -266,63 +322,70 @@ public:
         else
             cout << "Not available in this library.\n";
     }
-    void checkin(){
-        cout << "\nEnter the title of the magazine you want to return :";
-        string magazine_borrow;
-        cin >> magazine_borrow;
-        if(magazine_borrow==this->title){
-            this->numberOfCopies++;
-        }
-        cout << "Returning process completed successfully\n";
-    }
-    void renew() {
-        cout << "\nEnter the title of the magazine you want to renew :";
-        string magazine_borrow;
-        cin >> magazine_borrow;
-        cout << "How many times have you done this process for this magazine?\n";
-        int num_renew;
-        cin >> num_renew;
-        if (num_renew > 3) {
-            cout << "Sorry ,you have done the maximum of this process.\n";
-            if (magazine_borrow == this->title) { numberOfCopies++; }
-        } else {
-            cout << "Ok , it is available \n";
-            cout << "Enter the borrowing duration in days:";
-            int borrowing_duration;
-            cin >> borrowing_duration;
-            if (borrowing_duration > 30)
-                cout << "Not available It must be less than 31 days\n";
-            else {
-                cout << " The total price is : " << borrowing_duration * 10 << "\n";
-                cout << "*****(Renewing process completed successfully)*****\n";
-            }
 
+    void checkin_magazine(){
+        cout << "\nEnter the title of the magazine you want to return :";
+        cin >> title_magazine;
+        if( founded_magazine(title_magazine)) {
+            this->numberOfCopies++;
+            cout << "Returning process completed successfully\n";
+        }
+        else {
+            cout << "The title is incorrect.\n";
         }
     }
-    bool isAvailable() {
+    void renew_magazine() {
+        cout << "\nEnter the title of the magazine you want to renew :";
+        cin >>title_magazine;
+        if( founded_magazine(title_magazine)) {
+            cout << "How many times have you done this process for this magazine?\n";
+            int num_renew;
+            cin >> num_renew;
+            if(num_renew>3) {
+                cout << "Sorry ,you have done the maximum of this process.\n";
+
+
+            }
+            else
+            {
+                numberOfCopies++;
+                cout << "Ok , it is available \n";
+                cout << "Enter the borrowing duration in days:";
+                int borrowing_duration;
+                cin >> borrowing_duration;
+                if(borrowing_duration>30)
+                    cout << "Not available It must be less than 31 days\n";
+                else {
+                    cout << " The total price is : " << borrowing_duration * 10 << "\n";
+                    cout << "*****(Renewing process completed successfully)*****\n";
+                }
+
+            }
+        }
+        else {
+            cout << "The title is incorrect.\n";
+        }
+    }
+    bool isAvailable_magazine() {
         cout << "\nEnter the title of the magazine you want to know it is available :";
-        string magazine_borrow;
-        cin >> magazine_borrow;
-        if (this->title == magazine_borrow&&numberOfCopies>0) {
+        cin >> title_magazine;
+        if( founded_magazine(title_magazine)&&numberOfCopies>0) {
             cout << "This magazine is available.\n";
         } else
             cout << "This magazine is not available.\n";
     }
 
 };
-int Magazine::numberOfCopies=0;
+int Magazine::numberOfCopies=3;
 class Patron:public User,public Book,public Magazine{
 string  libraryCardNumber;
 string adress;
 public:
     Patron():User(){
        this->adress="" ;
+       this->libraryCardNumber="";
     }
-Patron( string name,string libraryCardNumber,string adress ): User(name)
-{
-    this->libraryCardNumber=libraryCardNumber;
-    this->adress=adress;
-}
+
 void registerr(){
     cout <<"***(register)***\n";
     cout << "Enter your name :";
@@ -335,38 +398,154 @@ void registerr(){
     cin >> phoneNumber;
     cout << "Enter your emailAddress :";
 cin >> emailAddress;
-    cout << "Enter your role :";
+    cout << "Enter your role : patron/librarian:";
 cin >> role;
 cout << "***(The account has been created successfully)***\n";
 }
+    string viewCheckedOutMaterials(){
+        cout << "total CheckedOutMaterials is:\n";
+     return checked_book+checked_magazine;
+    }
+};
+class Librarian:public User,public Book,public Magazine{
+    string employee_id;
+    string department;
+public:
+    Librarian():User(){
+        this->employee_id="";
+        this->department="";
+    }
+    void print_new_collection(string collection [],int num_of_new)
+    {
+        for(int i=0;i<10+num_of_new;i++)
+        {
+            cout << i+1<<"_ ";
+            if(collection[i].empty())
+                cout << "deleted!\n";
+            else
+            cout <<collection[i]<< "\n";
+        }
+    }
+    int num_of_different_books=0;
+    void addBook(){
+cout << "How many different books do you want to add?";
+cin >> num_of_different_books;
+cout << "Enter the title of the books:\n";
+for(int i=10;i<10+num_of_different_books;i++)
+{ cout << i+1 << "_";
+  cin>> book_collection[i];
+}
+cout << "The new collection is : \n";
+        print_new_collection(book_collection , num_of_different_books);
+cout << "***(Books have been added successfully)***\n";
+    }
+    int num_of_different_magazines=0;
+    void addMagazine(){
+        cout << "How many different magazines do you want to add?";
+        cin >> num_of_different_magazines;
+        cout << "Enter the title of the magazines:\n";
+        for(int i=10;i<10+num_of_different_magazines;i++)
+        {
+            cout << i+1 << "- ";
+            cin >> magazines_collection[i];
+        }
+        cout << "The new collection is : \n";
+        print_new_collection(magazines_collection, num_of_different_magazines);
+        cout << "***(magazines have been added successfully)***\n";
+    }
+    void edit_book() {
+        cout << "Enter the book you want to edit:";
+        cin >> title_book;
+        if (founded_book(title_book)) {
+            cout << "Enter the new :";
+            cin >> title_book;
+            book_collection[place_book] = title_book;
+            cout << "edited successfully\n";
+            print_new_collection(book_collection , num_of_different_books);
+        } else
+            cout << "Not found.\n";
 
 
+    }
+    void edit_magazine() {
+        cout << "Enter the magazine you want to edit:";
+        cin >> title_magazine;
+        if (founded_magazine(title_magazine)) {
+            cout << "Enter the new :";
+            cin >> title_magazine;
+            magazines_collection[place_magazine] = title_magazine;
+            cout << "edited successfully\n";
+            print_new_collection(magazines_collection, num_of_different_magazines);
+        }
+        else
+            cout << "Not found.\n";
+    }
+    void Delete_book(){
+        cout << "Enter the book you want to delete:";
+        cin >> title_book;
+        if (founded_book(title_book)) {
+            book_collection[place_book]="";
+            print_new_collection(book_collection , num_of_different_books);
+        }
+        else
+            cout << "not found.\n";
+    }
+    void Delete_magazine(){
+        cout << "Enter the magazine you want to delete:";
+        cin >> title_magazine;
+        if (founded_magazine(title_magazine)) {
+            magazines_collection[place_magazine]="";
+            print_new_collection(magazines_collection, num_of_different_magazines);
+        }
+        else
+            cout << "not found.\n";
+    }
 };
 int main() {
-   /* User c1("fatma","fatmaa","123123","012536478","fatma@gmail.com","patron");
+  /* User c1("fatma","fatmaa","123123","012536478","fatma@gmail.com","patron");
     c1.login();
     c1.logout();
     c1.changePassword();
-    cout << "\n--------------------------------------------------\n";
-Book c2("elsa","jonny","comedy",2);
-c2.checkout();//old=2,now=1
-c2.checkout();//old=1,now=0
-c2.checkin();//old=0,now=1
-c2.checkout();//old=1,now=0
- c2.checkout();//old=0,now=0 not available to borrow
-c2.renew();// if num of renew >3 old=0,now=1
- c2.checkout();//old=1,now=0
-    c2.isAvailable();
+    cout << "\n--------------------------------------------------\n";*/
+/*Book c2;
+c2.checkout_book();//old=2,now=1
+c2.checkout_book();//old=1,now=0
+    c2.checkout_book();//old=1,now=0
+    c2.checkout_book();//old=1,now=0
+c2.checkin_book();//old=0,now=1
+//c2.checkout_book();//old=1,now=0
+ c2.checkout_book();//old=0,now=0 not available to borrow
+c2.renew_book();// if num of renew >3 old=0,now=1
+ c2.checkout_book();//old=1,now=0
+    c2.isAvailable_book();
      cout << "\n--------------------------------------------------\n";
 
-    Magazine c3("frozen","tonny","2020/1/5",2);
-    c3.checkout();//old=2,now=1
-    c3.checkout();//old=1,now=0
-    c3.checkin();//old=0,now=1
-    c3.checkout();//old=1,now=0
-    c3.checkout();//old=0,now=0 not available to borrow
-    c3.isAvailable();
+    Magazine c3;
+    c3.checkout_magazine();//old=2,now=1
+
+    c3.checkout_magazine();//old=1,now=0
+    c3.checkin_magazine();//old=0,now=1
+    c3.checkout_magazine();//old=1,now=0
+    c3.checkout_magazine();//old=0,now=0 not available to borrow
+    c3.isAvailable_magazine();
+    cout << "\n--------------------------------------------------\n";
+   Patron c4;
+   c4.registerr();
+   c4.checkout_book();
+  c4.checkout_magazine();
+  c4.checkin_book();
+  c4.checkin_magazine();
+   cout << c4.viewCheckedOutMaterials();
+   c4.renew_book();
+   c4.renew_magazine();
     cout << "\n--------------------------------------------------\n";
 */
+//Librarian c5;
+/*c5.addBook();
+c5.edit_book();
+ c5.addMagazine();
+c5.edit_magazine();
+c5.Delete_book();*/
+   // c5.Delete_magazine();
     return 0;
 }
